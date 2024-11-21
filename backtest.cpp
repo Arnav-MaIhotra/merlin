@@ -97,10 +97,10 @@ private:
             std::getline(ss, temp, ',');
             
             try {
-                bar.close = std::stod(temp);  // Attempt to convert the string to a double
+                bar.close = std::stod(temp);
             } catch (const std::invalid_argument& e) {
                 std::cerr << "Invalid value for close price in line: " << line << "\n";
-                continue;  // Skip this line and continue to the next
+                continue;
             }
             
             data.push_back(bar);
