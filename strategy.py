@@ -1,6 +1,7 @@
 import pandas as pd
 import vectorbt as vbt
 import random
+import time
 
 def get_tickers(tickers):
     return [str(ticker) for ticker in tickers if isinstance(ticker, str) and ticker]
@@ -16,7 +17,12 @@ test_tickers = random.sample(tickers, 10)
 
 count = 0
 
-for i in test_tickers:
+total_tickers = 0
+
+for i in tickers:
+
+    if total_tickers % 250 == 0:
+        time.sleep(120)
 
     price = vbt.YFData.download(i, start="2020-11-20", end="2024-11-20").get("Close")
 
@@ -29,7 +35,11 @@ for i in test_tickers:
     exits = ma2.ma_crossed_above(ma1)
 
     pf = vbt.Portfolio.from_signals(price, entries, exits, init_cash=10000)
+    if pf.total_profit() == 0:
+        print("BLANK")
+        continue
     count += pf.total_profit()
     print(i, pf.total_profit())
+    total_tickers += 1
 
-print(count/10)
+print(count/total_tickers)
