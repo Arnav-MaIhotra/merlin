@@ -14,6 +14,25 @@ tickers = get_tickers(tickerss)
 
 count = 0
 
+time.sleep(300)
+
+price = vbt.YFData.download("NVDA").get("Close")
+
+ma1 = vbt.MA.run(price, 10)
+ma2 = vbt.MA.run(price, 50)
+RSI = vbt.RSI.run(price)
+
+entries = ma1.ma_crossed_above(ma2) & RSI.rsi_above(50)
+exits = ma2.ma_crossed_above(ma1)
+
+pf = vbt.Portfolio.from_signals(price, entries, exits, init_cash=10000)
+
+#SHARPES
+
+print(pf.stats())
+
+"""
+
 total_tickers = 0
 
 for j in range(10):
@@ -34,7 +53,7 @@ for j in range(10):
             ma3 = vbt.MA.run(price, 200)
             RSI = vbt.RSI.run(price)
 
-            entries = ma1.ma_crossed_above(ma2) & RSI.rsi_above(50)# & ma2.ma_crossed_above(ma3)
+            entries = ma1.ma_crossed_above(ma2/2) & RSI.rsi_above(50)# & ma2.ma_crossed_above(ma3)
             exits = ma2.ma_crossed_above(ma1)
 
             pf = vbt.Portfolio.from_signals(price, entries, exits, init_cash=10000)
@@ -48,3 +67,5 @@ for j in range(10):
         None
 
 print(count/total_tickers)
+
+"""
