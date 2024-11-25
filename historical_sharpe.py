@@ -8,9 +8,6 @@ def get_risk_free_rate():
     risk_free_rate = treasury_data['Close'].iloc[-1] / 100
     return risk_free_rate
 
-def get_tickers(tickers):
-    return [str(ticker) for ticker in tickers if isinstance(ticker, str) and ticker]
-
 def get_sharpe_ratios(stock_list, y):
     end_date = datetime.today()  - timedelta(days=365*y)
     start_date = end_date - timedelta(days=365*(y+1))
@@ -30,7 +27,7 @@ def get_sharpe_ratios(stock_list, y):
     annualized_return = mean_daily_return * 252
     annualized_std_dev = std_dev_daily_return * np.sqrt(252)
 
-    risk_free_rate = get_risk_free_rate()
+    risk_free_rate = 0.04
     
     sharpe_ratios = (annualized_return - risk_free_rate) / annualized_std_dev
 
@@ -39,10 +36,22 @@ def get_sharpe_ratios(stock_list, y):
     
     sharpe_ratios_df.to_csv(f'sharpe_ratios_{y}y.csv')
 
+def get_tickers(tickers):
+    return [str(ticker) for ticker in tickers if isinstance(ticker, str) and ticker]
+
 stocks = pd.read_csv("nasdaq_screener.csv")
 
 tickerss = list(stocks["Symbol"].values)
+
 tickers = get_tickers(tickerss)
 
-for i in range(2, 11):
+end_date = datetime.today()  - timedelta(days=365*1)
+start_date = end_date - timedelta(days=365*(1))
+
+start_date = start_date.strftime('%Y-%m-%d')
+end_date = end_date.strftime('%Y-%m-%d')
+
+print(start_date, end_date)
+
+for i in range(1, 11):
     get_sharpe_ratios(tickers, i)
