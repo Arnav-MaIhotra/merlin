@@ -30,7 +30,7 @@ for ticker in tickers:
 
     try:
 
-        data = vbt.YFData.download(ticker, start=start_date, end=end_date).get("Close")
+        data = vbt.YFData.download(ticker, start=start_date, end=end_date).get("Close") #ONLY IF FULL PERIOD IS AVAILABLE
 
         daily_returns = data.pct_change().dropna()
 
