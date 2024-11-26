@@ -27,8 +27,8 @@ risk_free_rate = 0.04
 end_date = datetime.now() - timedelta(days=365)
 start_date = end_date - timedelta(days=365)
 
-start_date = next_business_day(start_date)
-end_date = next_business_day(end_date)
+start_date = next_business_day(start_date).replace(hour=0, minute=0, second=0, microsecond=0)
+end_date = next_business_day(end_date).replace(hour=0, minute=0, second=0, microsecond=0)
 
 sharpes = {}
 
