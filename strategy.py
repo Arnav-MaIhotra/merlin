@@ -2,6 +2,7 @@ import pandas as pd
 import vectorbt as vbt
 import random
 import time
+import matplotlib.pyplot as plt
 
 def get_tickers(tickers):
     return [str(ticker) for ticker in tickers if isinstance(ticker, str) and ticker]
@@ -12,30 +13,42 @@ tickerss = list(stocks["Symbol"].values)
 
 tickers = get_tickers(tickerss)
 
-count = 0
+df = pd.read_csv("sharpe_ratios_vectorbt_1y.csv")
 
-test_tickers = pd.read_csv("sharpe_ratios.csv").get("Ticker").values[0:20]
+profits = []
 
-print(test_tickers)
+for j in range(10, 25):
 
-total_tickers = 20
+    count = 0
 
-for i in test_tickers:
+    total_tickers = 0
 
-    price = vbt.YFData.download(i, start="2023-11-25", end="2024-11-25").get("Close")
+    for i in df.get("Sharpe Ratio").values:
+        if i > j/10:
+            total_tickers += 1
+        else:
+            break
 
-    ma1 = vbt.MA.run(price, 10)
-    ma2 = vbt.MA.run(price, 50)
-    RSI = vbt.RSI.run(price)
+    test_tickers = df.get("Ticker").values[0:total_tickers]
 
-    entries = ma1.ma_crossed_above(ma2) & RSI.rsi_above(50)
-    exits = ma2.ma_crossed_above(ma1)
+    for i in test_tickers:
 
-    pf = vbt.Portfolio.from_signals(price, entries, exits, init_cash=10000)
-    if pf.total_profit() == 0:
-        print("BLANK")
-        continue
-    count += pf.total_profit()
-    print(i, pf.total_profit())
+        price = vbt.YFData.download(i, start="2023-11-28", end="2024-11-28").get("Close")
 
-print(count/total_tickers)
+        ma1 = vbt.MA.run(price, 10)
+        ma2 = vbt.MA.run(price, 50)
+        RSI = vbt.RSI.run(price)
+
+        entries = ma1.ma_crossed_above(ma2) & RSI.rsi_above(50)
+        exits = ma2.ma_crossed_above(ma1)
+
+        pf = vbt.Portfolio.from_signals(price, entries, exits, init_cash=10000)
+        if pf.total_profit() == 0:
+            print("BLANK")
+            continue
+        count += pf.total_profit()
+    print(j)
+
+    profits.append(count/total_tickers)
+
+plt.plot(range(10, 25), profits)
