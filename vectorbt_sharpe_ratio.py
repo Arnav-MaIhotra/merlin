@@ -30,6 +30,8 @@ start_date = end_date - timedelta(days=365)
 start_date = next_business_day(start_date)
 end_date = next_business_day(end_date)
 
+print(start_date, end_date)
+
 sharpes = {}
 
 count = 0

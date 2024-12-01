@@ -17,7 +17,7 @@ df = pd.read_csv("sharpe_ratios_vectorbt_1y.csv")
 
 profits = []
 
-for j in range(10, 25):
+for j in range(0, 26):
 
     count = 0
 
@@ -33,7 +33,7 @@ for j in range(10, 25):
 
     for i in test_tickers:
 
-        price = vbt.YFData.download(i, start="2023-11-28", end="2024-11-28").get("Close")
+        price = vbt.YFData.download(i, start="2023-12-04", end="2024-11-29").get("Close")
 
         ma1 = vbt.MA.run(price, 10)
         ma2 = vbt.MA.run(price, 50)
@@ -47,8 +47,17 @@ for j in range(10, 25):
             print("BLANK")
             continue
         count += pf.total_profit()
-    print(j)
 
     profits.append(count/total_tickers)
 
-plt.plot(range(10, 25), profits)
+    time.sleep((25-j)*10)
+
+print(profits)
+
+values1 = range(0, 26)
+
+values = [x / 10 for x in values1]
+
+plt.plot(values, profits)
+
+plt.show()
