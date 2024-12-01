@@ -17,6 +17,8 @@ df = pd.read_csv("sharpe_ratios_vectorbt_1y.csv")
 
 profits = []
 
+time.sleep(120)
+
 for j in range(0, 26):
 
     count = 0
@@ -50,7 +52,7 @@ for j in range(0, 26):
 
     profits.append(count/total_tickers)
 
-    time.sleep((25-j)*10)
+    time.sleep(120)
 
 print(profits)
 
