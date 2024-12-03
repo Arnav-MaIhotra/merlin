@@ -41,7 +41,7 @@ for i in test_tickers:
     ma2 = vbt.MA.run(price, 50)
     RSI = vbt.RSI.run(price)
 
-    entries = ma1.ma_crossed_above(ma2) & RSI.rsi_above(50)
+    entries = ma1.ma_crossed_above(ma2) & RSI.rsi_below(30)
     exits = ma2.ma_crossed_above(ma1)
 
     pf = vbt.Portfolio.from_signals(price, entries, exits, init_cash=10000)
