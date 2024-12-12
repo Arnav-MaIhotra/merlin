@@ -3,38 +3,42 @@ import yfinance as yf
 import time
 
 csv_file = "nasdaq_screener.csv"
-data = pd.read_csv(csv_file)
+data = pd.read_csv(csv_file)[["Symbol", "Industry"]]
 
-pe_ratios = {}
+ratios = {}
 
-count = 0
+ticker_count = {}
 
-for index, row in data.iterrows():
-    count += 1
-
-    symbol = row['Symbol']
-    industry = row['Industry']
-    
-    try:
-        stock = yf.Ticker(symbol)
-        info = stock.info
-        pe_ratio = info.get('trailingPE')
-        
-        if pe_ratio and industry:
-            if industry not in pe_ratios:
-                pe_ratios[industry] = []
-            pe_ratios[industry].append(float(pe_ratio))
-    
-    except Exception as e:
-        print(f"Error fetching data for {symbol}: {e}")
-
-    if count % 250 == 0:
-        print(symbol)
+for i in data.T:
+    if i % 250 == 0:
         time.sleep(120)
+    industry = data.T[i]["Industry"]
+    symbol = data.T[i]["Symbol"]
 
-industry_averages = {industry: sum(ratios) / len(ratios) for industry, ratios in pe_ratios.items()}
+    try:
 
-industry_avg_df = pd.DataFrame(list(industry_averages.items()), columns=['Industry', 'Average P/E Ratio'])
+        stock = yf.Ticker(symbol)
+        pe_ratio = stock.info.get('trailingPE')
 
-industry_avg_df.to_csv("industry_pe_averages.csv", index=False)
-print(industry_avg_df)
+        if pe_ratio:
+            pe_ratio = float(pe_ratio)
+        else:
+            continue
+
+        if industry not in ratios:
+            ratios[industry] = 0
+        if industry not in ticker_count:
+            ticker_count[industry] = 0
+
+        ratios[industry] += pe_ratio
+        ticker_count[industry] += 1
+    
+    except:
+        None
+
+for i in ratios:
+    ratios[i] /= ticker_count[i]
+
+df = pd.DataFrame({"Industry":ratios.keys(), "P/E Ratio":ratios.values()})
+
+df.to_csv("industry_pe_averages.csv", index=False)

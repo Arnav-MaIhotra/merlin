@@ -1,87 +1,50 @@
 Industry,,Symbol,Difference
-Accident &Health Insurance,153,AFL,4.557422749999999
-Air Freight/Delivery Services,5,AAL,22.859185253846153
-Auto & Home Supply Stores,10,AAP,26.444022500000003
-Auto Parts:O.E.M.,103,ADNT,79.021791572
-Banks,145,AFBI,-4.447266200000001
-Beverages (Production/Distribution),19,ABEV,-14.30456759608696
-Biotechnology: Biological Products (No Diagnostic Substances),101,ADMA,-39.620986315714276
-Biotechnology: Laboratory Analytical Instruments,0,A,-7.7642469999999975
-Biotechnology: Pharmaceutical Preparations,112,ADTX,-22.271272275109183
-Biotechnology: Pharmaceutical Preparations,166,AGIO,-18.325005071569183
-Biotechnology: Pharmaceutical Preparations,46,ACAD,1.484580928430816
-Biotechnology: Pharmaceutical Preparations,34,ABT,12.834551928430816
-Biotechnology: Pharmaceutical Preparations,15,ABBV,38.72469292843081
-Blank Checks,121,AEAEU,-135.9919512222222
-Blank Checks,3,AACT,-119.52956922222221
-Building Materials,127,AEHL,-21.55760833725
-Business Services,68,ACN,-20.70159696551724
-Clothing/Shoe/Accessory Stores,135,AEO,-2.92355025
-Computer Manufacturing,11,AAPL,15.234653399999996
-Computer Software: Prepackaged Software,63,ACIW,-inf
-Computer Software: Prepackaged Software,91,ADBE,-inf
-Computer Software: Prepackaged Software,96,ADEA,-inf
-Computer Software: Prepackaged Software,109,ADSK,-inf
-Diversified Commercial Services,26,ABM,-inf
-Diversified Commercial Services,27,ABNB,-inf
-Diversified Commercial Services,110,ADT,-inf
-Diversified Commercial Services,138,AER,-inf
-Durable Goods,133,AENT,5.934855500000001
-EDP Services,105,ADP,-43.63373335455793
-EDP Services,186,AGYS,-39.02516735455794
-Electric Utilities: Central,140,AES,-11.858084539148932
-Electric Utilities: Central,181,AGR,-9.075133539148933
-Electric Utilities: Central,137,AEP,-2.1569185391489327
-Electrical Products,128,AEHR,-16.51140304
-Engineering & Construction,185,AGX,0.978133636363637
-Farming/Seeds/Milling,183,AGRO,-26.157421042857145
-Finance Companies,168,AGM,-9.586096055072462
-Finance/Investors Services,124,AEF,-4.744033483132531
-Finance/Investors Services,86,ACV,-2.567366483132531
-Food Chains,60,ACI,-32.422441118461535
-Industrial Machinery/Components,85,ACU,-35.340029350035174
-Industrial Machinery/Components,64,ACLS,-32.45774735003518
-Industrial Machinery/Components,67,ACMR,-31.908174350035175
-Industrial Machinery/Components,161,AGCO,-0.3878793500351705
-Industrial Machinery/Components,9,AAON,12.880671649964825
-Industrial Machinery/Components,130,AEIS,53.35216464996483
-Investment Bankers/Brokers/Service,41,AC,-9.31438797457627
-Investment Managers,117,ADX,-21.05715702356688
-Investment Managers,73,ACP,-18.08558032356688
-Investment Managers,13,AB,-14.80621932356688
-Major Banks,16,ABCB,-inf
-Major Banks,69,ACNB,-inf
-Medical Specialities,56,ACHC,-13.755480068749998
-Medical/Nursing Services,113,ADUS,-27.503768499999993
-Metal Fabrications,182,AGRI,-27.917553352976743
-Metal Fabrications,42,ACA,12.77925955602326
-Military/Government/Technical,66,ACM,-30.71008698304348
-Mining & Quarrying of Nonmetallic Minerals (No Fuels),141,AESI,-inf
-Miscellaneous manufacturing industries,184,AGS,46.83741566666667
-Multi-Sector Companies,83,ACTG,-11.699701333333332
-Other Consumer Services,24,ABLV,-40.20324285725652
-Other Consumer Services,158,AFYA,-27.87586215725652
-Packaged Foods,100,ADM,-11.338416686666664
-Power Generation,123,AEE,-4.903753850000001
-Precious Metals,131,AEM,-inf
-Precious Metals,165,AGI,-inf
-Professional Services,139,AERT,45.89211352678572
-Property-Casualty Insurers,54,ACGLN,-7.8995029505
-Property-Casualty Insurers,55,ACGLO,-7.2258727505
-Property-Casualty Insurers,53,ACGL,-5.7550584505
-Property-Casualty Insurers,180,AGO,-5.089963150499999
-Property-Casualty Insurers,61,ACIC,-4.0259067505
-Property-Casualty Insurers,147,AFG,1.0417545495000002
-Real Estate,146,AFCG,-27.42337988994516
-Real Estate Investment Trusts,12,AAT,-inf
-Real Estate Investment Trusts,29,ABR,-inf
-Real Estate Investment Trusts,75,ACR,-inf
-Real Estate Investment Trusts,92,ADC,-inf
-Real Estate Investment Trusts,174,AGNC,-inf
-Real Estate Investment Trusts,195,AHT,-inf
-Retail-Auto Dealers and Gas Stations,20,ABG,-9.166565732666667
-Semiconductors,98,ADI,7.088153329479063
-Services-Misc. Amusement & Recreation,51,ACEL,-53.232245274294115
-Specialty Insurers,82,ACT,-34.8768219
-Trusts Except Educational Religious and Charitable,144,AFB,-inf
-Trusts Except Educational Religious and Charitable,162,AGD,-inf
+Aerospace,58,PAC,-37.74820601142857
+Aerospace,72,AVAV,30.32585798857143
+Beverages (Production/Distribution),30,CCU,-13.479566596086961
+Biotechnology: Pharmaceutical Preparations,12,JAGX,-22.20846574156918
+Biotechnology: Pharmaceutical Preparations,22,PTGX,-7.308328071569182
+Blank Checks,13,AEAEU,-135.9919512222222
+Blank Checks,61,TBMC,-79.0396752222222
+Broadcasting,85,FOXA,-19.57520077583333
+Broadcasting,23,SPOT,102.37583122416667
+Building Materials,11,EXP,-1.8660715232499996
+Computer Software: Prepackaged Software,3,ORCL,-inf
+Computer Software: Prepackaged Software,5,INFA,-inf
+Computer Software: Prepackaged Software,65,HPAI,-inf
+Computer Software: Prepackaged Software,78,ALAR,-inf
+Electric Utilities: Central,69,RNW,103.00302946085107
+Finance Companies,60,IQI,-12.89525305507246
+Finance/Investors Services,98,GRF,-7.293793483132532
+Finance/Investors Services,77,NRO,5.115966516867468
+Finance/Investors Services,54,GLU,7.324298516867467
+Finance/Investors Services,7,GLV,10.388694516867469
+Finance: Consumer Services,45,FOA,-26.13586134079452
+Food Chains,39,SFM,-0.33345811846153595
+Industrial Specialties,25,CDRE,-50.34807156666668
+Investment Managers,15,PHD,-19.28954882356688
+Investment Managers,41,RSF,-17.16277592356688
+Investment Managers,93,CHI,-12.18065832356688
+Investment Managers,6,LAZ,-4.150711323566881
+Major Banks,49,VBTX,-inf
+Major Banks,64,ASB,-inf
+Major Banks,79,PRK,-inf
+Medical Specialities,73,HUM,-2.55186806875
+Medical/Dental Instruments,71,RMD,-22.730201373142854
+Medical/Dental Instruments,2,IRMD,-17.56893737314286
+Metal Mining,14,GSM,-21.2840765
+Oil & Gas Production,66,BRY,-13.781586893181816
+Oil & Gas Production,18,PBR,-12.041424393181817
+Oil & Gas Production,0,PRT,-9.093386893181815
+Ordnance And Accessories,67,AXON,109.77372840000001
+Packaged Foods,17,BG,-15.221115686666662
+Packaged Foods,88,INGR,-11.890633686666662
+Precious Metals,36,SILV,-inf
+Precious Metals,83,TGB,-inf
+Real Estate Investment Trusts,75,CTRE,-inf
+Real Estate Investment Trusts,87,PMT,-inf
+Savings Institutions,63,CLBK,91.48706843611112
+Telecommunications Equipment,10,CHT,-20.91727291171429
+Telecommunications Equipment,16,ITI,192.44594908828572
+Trusts Except Educational Religious and Charitable,26,VKQ,-inf
+Trusts Except Educational Religious and Charitable,82,RQI,-inf
