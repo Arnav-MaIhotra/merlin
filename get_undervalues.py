@@ -1,18 +1,34 @@
 import pandas as pd
-import yfinance_cache as yf
+import yfinance as yf
 import time
+import math
+
+def calculate_rsi(data, period=14):
+    delta = data.diff(1)
+
+    gain = delta.where(delta > 0, 0)
+    loss = -delta.where(delta < 0, 0)
+
+    avg_gain = gain.rolling(window=period, min_periods=1).mean()
+    avg_loss = loss.rolling(window=period, min_periods=1).mean()
+
+    rs = avg_gain / avg_loss
+
+    rsi = 100 - (100 / (1 + rs))
+
+    return rsi.iloc[-1].values[0]
 
 stocks_csv_path = "nasdaq_screener.csv"
 industry_csv_path = "industry_pe_averages.csv"
 
-stocks_df = pd.read_csv(stocks_csv_path).sample(200)
+stocks_df = pd.read_csv(stocks_csv_path).sample(250)
 industry_df = pd.read_csv(industry_csv_path)
 
 total = len(stocks_df)
 
-diffs = {}
+pe_diffs = {}
 
-count = 0
+rsi_diffs = {}
 
 for i in stocks_df["Symbol"].values:
     try:
@@ -24,25 +40,25 @@ for i in stocks_df["Symbol"].values:
 
         if pe_ratio:
             pe_ratio = float(pe_ratio)
-            diffs[i] = (pe_ratio-industry_pe)/industry_pe
+            pe_diffs[i] = (pe_ratio-industry_pe)/industry_pe
         else:
-            continue
-    except:
             None
-    count += 1
-    if count % 250 == 0:
-        print(round(count*100/total, 2))
-        time.sleep(20)
-    if count % 500 == 0:
-         time.sleep(120)
+        rsi_data = yf.download(i, period="1mo", interval="1d")
 
-try:
+        rsi = calculate_rsi(rsi_data["Adj Close"].tail(14))
 
-    diffs = dict(sorted(diffs.items(), key=lambda item: item[1]))
+        rsi_diffs[i] = (rsi-30)/30
+    except Exception as e:
+        print(e)
 
-    pd.DataFrame.from_dict({"Ticker":tuple(diffs.keys()), "P/E Ratio % Change":tuple(diffs.values())}).to_csv("pe_ratio_industry_avg_diff.csv", index=False)
+rsi_diffs = {key: value for key, value in rsi_diffs.items() if value != -1 and not (isinstance(value, float) and math.isnan(value))}
 
-except:
-     
-    ln = input(">>> ")
-    exec(ln)
+pe_diffs = {key: value for key, value in pe_diffs.items() if not (isinstance(value, float) and math.isnan(value))}
+
+common_symbols = rsi_diffs.keys() & pe_diffs.keys()
+
+undervalue_scores = {k: (pe_diffs[k]*0.7 + rsi_diffs[k]*0.3)*-100 for k in common_symbols}
+
+diffs = dict(sorted(undervalue_scores.items(), key=lambda item: item[1], reverse=True))
+
+pd.DataFrame.from_dict({"Ticker":tuple(diffs.keys()), "Undervalue Score":tuple(diffs.values())}).to_csv("undervalue_score.csv", index=False)
