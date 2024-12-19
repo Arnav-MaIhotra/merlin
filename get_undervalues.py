@@ -3,8 +3,6 @@ import yfinance as yf
 import time
 import math
 
-time.sleep(300)
-
 def calculate_rsi(data, period=14):
     delta = data.diff(1)
 
@@ -114,6 +112,18 @@ for i in stocks_df["Symbol"].values:
         altman_z_diffs[i] = (1.81-altman_z)/1.81
     except Exception as e:
         print(e)
+    
+    count += 1
+
+    if count % 200 == 0:
+        print(count*100/1750)
+        time.sleep(240)
+
+    count += 1
+    
+    if count % 200 == 0:
+        print(count*100/1750)
+        time.sleep(500)
 
     count += 1
 
