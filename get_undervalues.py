@@ -115,12 +115,6 @@ for i in stocks_df["Symbol"].values:
     
     count += 1
 
-    count += 1
-
-    if count % 200 == 0:
-        print(count*100/1750)
-        time.sleep(240)
-
 rsi_diffs = {key: value for key, value in rsi_diffs.items() if value != -1 and not (isinstance(value, float) and math.isnan(value))}
 
 pe_diffs = {key: value for key, value in pe_diffs.items() if not (isinstance(value, float) and math.isnan(value))}
