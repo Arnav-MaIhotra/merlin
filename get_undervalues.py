@@ -3,8 +3,6 @@ import yfinance as yf
 import time
 import math
 
-time.sleep(300)
-
 def calculate_rsi(data, period=14):
     delta = data.diff(1)
 
@@ -68,7 +66,11 @@ def calculate_altman_z_score(data):
 stocks_csv_path = "nasdaq_screener.csv"
 industry_csv_path = "industry_pe_averages.csv"
 
+<<<<<<< HEAD
 stocks_df = pd.read_csv(stocks_csv_path)[3500:5250]
+=======
+stocks_df = pd.read_csv(stocks_csv_path).sample(200)
+>>>>>>> c51dca34cd1878fc1ad84c859f06e0a58e18adbf
 industry_df = pd.read_csv(industry_csv_path)
 
 total = len(stocks_df)
@@ -114,6 +116,8 @@ for i in stocks_df["Symbol"].values:
         altman_z_diffs[i] = (1.81-altman_z)/1.81
     except Exception as e:
         print(e)
+    
+    count += 1
 
     count += 1
 
