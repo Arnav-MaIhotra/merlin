@@ -5,7 +5,7 @@ import time
 csv_file = "nasdaq_screener.csv"
 data = pd.read_csv(csv_file)[["Symbol", "Industry"]]
 
-ratios = {}
+yields = {}
 
 ticker_count = {}
 
@@ -18,19 +18,19 @@ for i in data.T:
     try:
 
         stock = yf.Ticker(symbol)
-        pe_ratio = stock.info.get('trailingPE')
+        dividend_yield = stock.info.get('dividendYield')
 
-        if pe_ratio:
-            pe_ratio = float(pe_ratio)
+        if dividend_yield:
+            dividend_yield = float(dividend_yield)
         else:
             continue
 
-        if industry not in ratios:
-            ratios[industry] = 0
+        if industry not in yields:
+            yields[industry] = 0
         if industry not in ticker_count:
             ticker_count[industry] = 0
 
-        ratios[industry] += pe_ratio
+        yields[industry] += dividend_yield
         ticker_count[industry] += 1
     
     except:
@@ -41,9 +41,9 @@ for i in data.T:
     if c % 250 == 0:
         time.sleep(120)
 
-for i in ratios:
-    ratios[i] /= ticker_count[i]
+for i in yields:
+    yields[i] /= ticker_count[i]
 
-df = pd.DataFrame({"Industry":ratios.keys(), "P/E Ratio":ratios.values()})
+df = pd.DataFrame({"Industry":yields.keys(), "P/E yield":yields.values()})
 
-df.to_csv("industry_pe_averages.csv", index=False)
+df.to_csv("industry_dividend_yield_averages.csv", index=False)
