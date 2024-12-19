@@ -66,7 +66,7 @@ def calculate_altman_z_score(data):
 stocks_csv_path = "nasdaq_screener.csv"
 industry_csv_path = "industry_pe_averages.csv"
 
-stocks_df = pd.read_csv(stocks_csv_path)[5250:]
+stocks_df = pd.read_csv(stocks_csv_path).sample(200)
 industry_df = pd.read_csv(industry_csv_path)
 
 total = len(stocks_df)
@@ -115,22 +115,6 @@ for i in stocks_df["Symbol"].values:
     
     count += 1
 
-    if count % 200 == 0:
-        print(count*100/1750)
-        time.sleep(240)
-
-    count += 1
-    
-    if count % 200 == 0:
-        print(count*100/1750)
-        time.sleep(500)
-
-    count += 1
-
-    if count % 200 == 0:
-        print(count*100/1757)
-        time.sleep(300)
-
 rsi_diffs = {key: value for key, value in rsi_diffs.items() if value != -1 and not (isinstance(value, float) and math.isnan(value))}
 
 pe_diffs = {key: value for key, value in pe_diffs.items() if not (isinstance(value, float) and math.isnan(value))}
@@ -141,4 +125,4 @@ undervalue_scores = {k: (pe_diffs[k]*0.35 + pb_diffs[k]*0.35 + rsi_diffs[k]*0.1 
 
 diffs = dict(sorted(undervalue_scores.items(), key=lambda item: item[1], reverse=True))
 
-pd.DataFrame.from_dict({"Ticker":tuple(diffs.keys()), "Undervalue Score":tuple(diffs.values())}).to_csv("undervalue_score_4.csv", index=False)
+pd.DataFrame.from_dict({"Ticker":tuple(diffs.keys()), "Undervalue Score":tuple(diffs.values())}).to_csv("undervalue_score.csv", index=False)
