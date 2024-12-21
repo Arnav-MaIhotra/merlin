@@ -39,6 +39,7 @@ for i in data.T:
     c += 1
 
     if c % 250 == 0:
+        print(c*100/len(data))
         time.sleep(120)
 
 for i in ratios:
