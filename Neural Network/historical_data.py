@@ -1,7 +1,7 @@
 import yfinance as yf
 import pandas as pd
 
-stocks = pd.read_csv("nasdaq_screener.csv")
+stocks = pd.read_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\nasdaq_screener.csv")
 
 tickers = list(stocks["Symbol"].values)
 
