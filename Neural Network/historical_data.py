@@ -21,7 +21,7 @@ for ticker in tickers:
 
     data = yf.download(ticker, interval="1wk", end="2024-01-01")
 
-    data.to_csv(r"C:\Users\arnav\OneDrive\Documents\merlin\Neural Network\stock_data/{}.csv".format(ticker))
+    data.to_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\stock_data/{}.csv".format(ticker))
 
     count += 1
     if count % 250 == 0:
