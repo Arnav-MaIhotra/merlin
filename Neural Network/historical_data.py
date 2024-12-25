@@ -4,9 +4,9 @@ import os
 import sys
 import time
 
-stocks = pd.read_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\nasdaq_screener.csv")
+stocks = pd.read_csv(r"C:\Users\maskenzi\merlin\nasdaq_screener.csv")
 
-tickers = list(stocks["Symbol"].values)[0:1750]
+tickers = list(stocks["Symbol"].values)[1750:3500]
 
 for i in range(len(tickers)):
     tickers[i] = str(tickers[i])
@@ -21,7 +21,7 @@ for ticker in tickers:
 
     data = yf.download(ticker, interval="1wk", end="2024-01-01")
 
-    data.to_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\stock_data/{}.csv".format(ticker))
+    data.to_csv(r"C:\Users\maskenzi\merlin\Neural Network\stock_data/{}.csv".format(ticker))
 
     count += 1
     if count % 250 == 0:
