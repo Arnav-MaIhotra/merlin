@@ -1,13 +1,30 @@
 import yfinance as yf
 import pandas as pd
+import os
+import sys
+import time
 
 stocks = pd.read_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\nasdaq_screener.csv")
 
-tickers = list(stocks["Symbol"].values)
+tickers = list(stocks["Symbol"].values)[0:1750]
 
 for i in range(len(tickers)):
     tickers[i] = str(tickers[i])
 
-data = yf.download(tickers, "2014-01-01", "2024-01-01")
+count = 0
 
-print(data["Adj Close"].to_csv("Neural Network/10y_data.csv"))
+for ticker in tickers:
+
+    if "/" in ticker or "^" in ticker:
+        count += 1
+        continue
+
+    data = yf.download(ticker, interval="1wk", end="2024-01-01")
+
+    data.to_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\stock_data/{}.csv".format(ticker))
+
+    count += 1
+    if count % 250 == 0:
+
+        print(count*100/len(tickers))
+        time.sleep(120)
