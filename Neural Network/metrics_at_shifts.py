@@ -16,7 +16,7 @@ API_KEY = os.getenv("FINNHUB_API_KEY")
 
 finnhub_client = finnhub.Client(API_KEY)
 
-shifts = pd.read_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\10y_buys.csv")
+shifts = pd.read_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\historical_buys.csv")
 
 count = 0
 
@@ -48,9 +48,11 @@ for i in shifts.T:
 
     if eps:
 
-        price = yf.download(ticker, start=date, end=(datetime.strptime(date, "%Y-%m-%d")+timedelta(days=7)).strftime("%Y-%m-%d"))["Close"].iloc[0].values[0]
+        prices = pd.read_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\stock_data\\{}.csv".format(ticker)).iloc[2:].reset_index(drop=True).rename({"Price":"Date"}, axis=1)
 
-        pe_ratio = price/eps
+        price = prices.iloc[prices[prices["Date"] == date].index.values[0]]["Close"]
+
+        pe_ratio = float(price)/eps
 
         tickers.append(ticker)
         growths.append(growth)
@@ -72,13 +74,13 @@ for i in shifts.T:
         #sys.stderr = open(os.devnull, 'w')
 
 
-df = pd.DataFrame({"Ticker":tickers, "Growth":growths, "Date":dates, "P/E Ratios":pe_ratios})
+df = pd.DataFrame({"Ticker":tickers, "Growth":growths, "Date":dates, "P/E Ratio":pe_ratios})
 
 df.to_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\buy_metrics_v1.csv", index=False)
 
 time.sleep(61)
 
-shifts = pd.read_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\10y_sells.csv")
+shifts = pd.read_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\historical_sells.csv")
 
 count = 0
 
@@ -110,9 +112,11 @@ for i in shifts.T:
 
     if eps:
 
-        price = yf.download(ticker, start=date, end=(datetime.strptime(date, "%Y-%m-%d")+timedelta(days=7)).strftime("%Y-%m-%d"))["Close"].iloc[0].values[0]
+        prices = pd.read_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\stock_data\{}.csv".format(ticker)).iloc[2:].reset_index(drop=True).rename({"Price":"Date"}, axis=1)
 
-        pe_ratio = price/eps
+        price = prices.iloc[prices[prices["Date"] == date].index.values[0]]["Close"]
+
+        pe_ratio = float(price)/eps
 
         tickers.append(ticker)
         growths.append(growth)
@@ -134,6 +138,6 @@ for i in shifts.T:
         #sys.stderr = open(os.devnull, 'w')
 
 
-df = pd.DataFrame({"Ticker":tickers, "Growth":growths, "Date":dates, "P/E Ratios":pe_ratios})
+df = pd.DataFrame({"Ticker":tickers, "Growth":growths, "Date":dates, "P/E Ratio":pe_ratios})
 
 df.to_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\sell_metrics_v1.csv", index=False)

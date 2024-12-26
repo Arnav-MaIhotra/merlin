@@ -10,4 +10,4 @@ API_KEY = os.getenv("FINNHUB_API_KEY")
 
 finnhub_client = finnhub.Client(API_KEY)
 
-print(yf.Ticker("AAPL").history())
+print(yf.download("AAPL"))
