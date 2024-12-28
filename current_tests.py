@@ -10,4 +10,3 @@ API_KEY = os.getenv("FINNHUB_API_KEY")
 
 finnhub_client = finnhub.Client(API_KEY)
 
-print(yf.download("AAPL"))
