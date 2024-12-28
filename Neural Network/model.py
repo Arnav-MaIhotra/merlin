@@ -21,7 +21,7 @@ outliers = clf.predict(pe_buys)
 
 pe_buys = pe_buys[outliers != -1]
 
-ones = np.ones((pe_buys.shape))
+ones = np.zeros((pe_buys.shape))
 
 sells = pd.read_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\Neural Network\sell_metrics_v1.csv")
 
@@ -33,7 +33,7 @@ outliers = clf.predict(pe_sells)
 
 pe_sells = pe_sells[outliers != -1]
 
-zeros = np.zeros((pe_sells.shape))
+zeros = np.ones((pe_sells.shape))
 
 X = np.concatenate((pe_buys, pe_sells))
 
