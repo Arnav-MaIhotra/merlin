@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "stdexcept": "cpp"
-    }
+    },
+    "julia.environmentPath": "c:\\Users\\arnav\\OneDrive\\Documents\\Merlin\\Neural Network"
 }
