@@ -1,12 +1,5 @@
-import finnhub
-import pandas as pd
-import os
-from dotenv import load_dotenv
 import yfinance as yf
+import json
 
-load_dotenv()
-
-API_KEY = os.getenv("FINNHUB_API_KEY")
-
-finnhub_client = finnhub.Client(API_KEY)
-
+data = yf.download("AIMD", start="2019-09-30")
+print(data)
