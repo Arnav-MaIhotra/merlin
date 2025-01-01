@@ -87,10 +87,16 @@ for i in shifts.T:
                     term_3 = 3.3*ebit/total_assets
 
                     price_data = yf.download(ticker, start=date)["Close"]
-                    while price_data.empty:
+                    empty_count = 0
+                    while price_data.empty and empty_count < 3:
                         print(count*100/len(shifts))
                         time.sleep(30)
                         price_data = yf.download(ticker, start=date)["Close"]
+                        empty_count += 1
+                    
+                    if price_data.empty:
+                        continue
+
                     price = price_data.values[0][0]
 
                     shares_outstanding = shares_outstandings[date]
