@@ -13,3 +13,5 @@ Types of models & systems:
 Notes for neural network [HERE](https://github.com/Arnav-MaIhotra/merlin/blob/main/Neural%20Network/neural_network_notes.md)
 
 Notes for forex [HERE](https://github.com/Arnav-MaIhotra/merlin/blob/main/forex/forex_notes.md)
+
+Notes for crypto [HERE](https://github.com/Arnav-MaIhotra/merlin/blob/main/crypto/crypto_notes.md)

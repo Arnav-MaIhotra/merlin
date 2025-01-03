@@ -1,4 +1,4 @@
-# Neural Network
+# Neural Network Notes
 
 - Combine as many relevent metrics as possible into a binary classification system
 - Possible model choices include feedforward neural networks, multilayer perceptrons, and support vector machine - neural network hybrids
