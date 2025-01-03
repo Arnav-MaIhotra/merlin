@@ -1,44 +1,12 @@
-import requests
-import pandas as pd
-import os
-from dotenv import load_dotenv
+import yfinance as yf
 
-load_dotenv()
+currencies = usd_currency_pairs = [
+ "EUR/USD", "GBP/USD", "AUD/USD", "USD/JPY", "USD/CHF", "USD/CAD", "NZD/USD", "USD/SGD", "USD/HKD", "USD/MXN", "USD/TRY", "USD/INR", "USD/ZAR", "USD/KRW", "USD/BRL", "USD/RUB", "USD/THB", "USD/IDR", "USD/CLP", "USD/PKR", "USD/EGP", "USD/NGN", "USD/BDT", "USD/VND", "USD/AED", "USD/KWD"]
 
-API_KEY = os.getenv("ALPHAVANTAGE_API_KEY")
+for currency in currencies:
 
+    currency = currency.replace("/", "")+"=X"
 
-base_currency = 'EUR'
-quote_currency = 'USD'
+    forex_data = yf.download(currency, end="2025-1-1")
 
-url = f'https://www.alphavantage.co/query'
-params = {
-    'function': 'FX_DAILY',
-    'from_symbol': base_currency,
-    'to_symbol': quote_currency,
-    'apikey': API_KEY,
-    'outputsize': 'full'
-}
-
-response = requests.get(url, params=params)
-
-if response.status_code == 200:
-    data = response.json()
-    if 'Time Series FX (Daily)' in data:
-        time_series = data['Time Series FX (Daily)']
-        df = pd.DataFrame.from_dict(time_series, orient='index')
-        df = df.rename(columns={
-            '1. open': 'Open',
-            '2. high': 'High',
-            '3. low': 'Low',
-            '4. close': 'Close'
-        })
-        df.index = pd.to_datetime(df.index)
-        df = df.sort_index()
-        
-        df.to_csv('forex_data.csv')
-        print("Data saved to 'forex_data.csv'")
-    else:
-        print("Error: No data found.")
-else:
-    print(f"Error: Unable to fetch data. Status code {response.status_code}")
+    forex_data.to_csv(r"C:\Users\arnav\OneDrive\Documents\Merlin\forex\forex_data\{}.csv".format(currency.replace("/", "").replace("=X", "")))
